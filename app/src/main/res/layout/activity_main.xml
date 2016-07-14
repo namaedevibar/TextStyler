@@ -19,7 +19,6 @@
         android:layout_marginTop="36dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:text="Sample Text"
 
 
         />
@@ -48,46 +47,54 @@
         android:layout_marginLeft="31dp"
         android:layout_marginStart="31dp" />
 
-    <RadioButton
+    <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Red"
-        android:id="@+id/rdRed"
-        android:layout_below="@+id/ckBold"
+        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="31dp"
-        android:checked="false"
-        android:textColor="#f42929" />
+        android:id="@+id/rdColor">
 
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Green"
-        android:id="@+id/rdGreen"
-        android:layout_below="@+id/rdRed"
-        android:checked="false"
-        android:textColor="#30fb26" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Red"
+            android:id="@+id/rdRed"
+            android:checked="false"
+            android:textColor="#f42929"
+            android:layout_above="@+id/rdColor"
+            android:layout_alignRight="@+id/rdColor"
+            android:layout_alignEnd="@+id/rdColor" />
 
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Blue"
-        android:id="@+id/rdBlue"
-        android:layout_below="@+id/rdGreen"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:checked="false"
-        android:textColor="#155cf4" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Blue"
+            android:id="@+id/rdBlue"
+            android:layout_below="@+id/rdGreen"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:checked="false"
+            android:textColor="#155cf4" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Green"
+            android:id="@+id/rdGreen"
+            android:layout_below="@+id/rdRed"
+            android:checked="false"
+            android:textColor="#30fb26" />
+
+    </RadioGroup>
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/txtResult"
-        android:layout_marginTop="54dp"
-        android:text="Sample Text"
-        android:layout_below="@+id/rdBlue"
-        android:layout_alignLeft="@+id/ckItalic"
-        android:layout_alignStart="@+id/ckItalic" />
+        android:layout_below="@+id/rdColor"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp" />
+
 </RelativeLayout>

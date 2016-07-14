@@ -1,20 +1,16 @@
 package com.activity.devibar.textstyler;
 
-import android.content.Context;
 import android.graphics.Color;
-import android.graphics.ImageFormat;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,27 +20,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         set();
-
     }
+
+
+
     private EditText mSample;
     private TextView mResult;
     private CheckBox mBold;
     private CheckBox mItalic;
-    private RadioButton mRed;
-    private RadioButton mBlue;
-    private RadioButton mGreen;
+    private RadioGroup mColor;
 
 
 
-    public void set(){
+    public void set() {
 
         mSample = (EditText) findViewById(R.id.etSample);
         mResult = (TextView) findViewById(R.id.txtResult);
         mBold = (CheckBox) findViewById(R.id.ckBold);
         mItalic = (CheckBox) findViewById(R.id.ckItalic);
-        mRed = (RadioButton) findViewById(R.id.rdRed);
-        mBlue = (RadioButton) findViewById(R.id.rdBlue);
-        mGreen = (RadioButton) findViewById(R.id.rdGreen);
+        mColor = (RadioGroup) findViewById(R.id.rdColor);
+
+
+
+
+
 
 
 
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                    mResult.setText(mSample.getText());
+                mResult.setText(mSample.getText());
 
 
             }
@@ -70,34 +69,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
         mItalic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (mItalic.isChecked()){
-                    if (mBold.isChecked()){
-                        mResult.setTypeface(null, Typeface.BOLD_ITALIC);
-                    }
-                    else
-                    {
-                        mResult.setTypeface(null, Typeface.ITALIC);
-                    }
-
+                if (mItalic.isChecked() && mBold.isChecked()) {
+                    mResult.setTypeface(null, Typeface.BOLD_ITALIC);
+                } else if (mItalic.isChecked()) {
+                    mResult.setTypeface(null, Typeface.ITALIC);
+                } else if (mBold.isChecked()) {
+                    mResult.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                } else {
+                    mResult.setTypeface(null, Typeface.NORMAL);
                 }
-
-
-                    if (mBold.isChecked()){
-                        mResult.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-                    }
-                    else
-                    {
-
-                            mResult.setTypeface(null, Typeface.NORMAL);}
-
-
-
             }
         });
 
@@ -105,94 +89,35 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (mBold.isChecked()){
-                    if (mItalic.isChecked()){
-                        mResult.setTypeface(null, Typeface.BOLD_ITALIC);
-                    }
-                    else
-                    {
-
-                        mResult.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-                    }
-
+                if (mItalic.isChecked() && mBold.isChecked()) {
+                    mResult.setTypeface(null, Typeface.BOLD_ITALIC);
+                } else if (mBold.isChecked()) {
+                    mResult.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                } else if (mItalic.isChecked()) {
+                    mResult.setTypeface(null, Typeface.ITALIC);
+                } else {
+                    mResult.setTypeface(null, Typeface.NORMAL);
                 }
-
-
-                    if (mItalic.isChecked()){
-                        mResult.setTypeface(null, Typeface.ITALIC);
-                    }
-                    else
-                    {
-
-                        mResult.setTypeface(null, Typeface.NORMAL);}
-
-
-
-
-
-
 
 
             }
         });
 
-
-        mRed.setOnClickListener(new View.OnClickListener() {
+        mColor.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-
-                if (mRed.isChecked()) {
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int id = mColor.getCheckedRadioButtonId();
+                if (id == R.id.rdRed){
                     mResult.setTextColor(Color.RED);
                 }
-
-                mRed.setChecked(false);
-                mGreen.setChecked(false);
-                mBlue.setChecked(false);
-            }
-        });
-
-
-        mBlue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (mBlue.isChecked()) {
+                else  if (id == R.id.rdBlue){
                     mResult.setTextColor(Color.BLUE);
                 }
-
-                mRed.setChecked(false);
-                mGreen.setChecked(false);
-                mBlue.setChecked(false);
-            }
-        });
-
-
-        mGreen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (mGreen.isChecked()) {
+                if (id == R.id.rdGreen){
                     mResult.setTextColor(Color.GREEN);
                 }
-
-                mRed.setChecked(false);
-                mGreen.setChecked(false);
-                mBlue.setChecked(false);
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
 }
